@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TokenGuard } from './modules/auth/guards/token.guard';
 import { AuthGuard } from './modules/auth/guards/auth.guard';
+import { NoAuthGuard } from './modules/auth/guards/no-auth.guard';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'auth',
+    canActivate:[NoAuthGuard],
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
