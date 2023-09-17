@@ -1,11 +1,11 @@
 import { Route, RouterModule } from "@angular/router";
-import { TaskListComponent } from "./components/task-list/task-list.component";
 import { NgModule } from "@angular/core";
+import { TaskContainerComponent } from "./components/task-container/task-container.component";
 
 const routes: Route[] = [
     {
         path: '',
-        component:TaskListComponent
+        component:TaskContainerComponent
     }
 ]
 @NgModule({
