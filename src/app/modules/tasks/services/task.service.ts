@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { Task } from 'src/app/interfaces/task.interface';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { TaskCreationRequest } from '../../../interfaces/task-creation-request.interface';
@@ -9,6 +9,8 @@ import { TaskCreationRequest } from '../../../interfaces/task-creation-request.i
 })
 export class TaskService {
   private readonly BASE_URL = 'http://localhost:8080/api/tasks';
+  private _taskUpdateSubject = new Subject<void>();
+  public taskUpdateSubject$ = this._taskUpdateSubject.asObservable();
 
   constructor(private _http: HttpClient, private _tokenService: TokenService) {}
 
@@ -28,6 +30,13 @@ export class TaskService {
     });
   }
 
+  /**
+   * 
+   * @param title
+   * @param description 
+   * @param dueDate 
+   * @returns an observable of the just created task
+   */
   createTask(title: string, description: string, dueDate: moment.Moment): Observable<Task> {
     const body: TaskCreationRequest = {
       title,
@@ -36,4 +45,21 @@ export class TaskService {
     };
     return this._http.post<Task>(`${this.BASE_URL}/create`, body, { headers: this.setAuthHeaders() });
   }
+
+  /**
+   * 
+   * @param updatedTask 
+   * @returns an observable of the updated task
+   */
+  updateTask(updatedTask: Task): Observable<Task> {
+    return this._http.put<Task>(`${this.BASE_URL}/update`, updatedTask, {
+      headers: this.setAuthHeaders(),
+    }).pipe(
+      tap(() => {
+        this._taskUpdateSubject.next();
+      })
+    )
+  }
+
+
 }

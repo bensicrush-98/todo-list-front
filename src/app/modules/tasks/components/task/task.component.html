@@ -1,5 +1,16 @@
-<li>
-    <span>title: {{title}}</span>
-    <p>description: {{description}}</p>
-    <p>expiration: {{dueDate | date}}</p>
+<li class="list-group-item d-flex justify-content-between align-items-center">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="todoCheck">
+        <label class="form-check-label" for="todoCheck">
+            {{title}}
+        </label>
+    </div>
+    <select [value]="status" class="form-select form-select-sm" aria-label="Todo status" style="width: 150px;"
+        (change)="onStatusChanged($event)">
+        <option [selected]="status === taskStatus.PENDING" value="pending">Pending</option>
+        <option [selected]="status === taskStatus.IN_PROGRESS" value="in-progress">In progress</option>
+        <option [selected]="status === taskStatus.COMPLETED" value="completed">Completed</option>
+    </select>
+
+
 </li>
