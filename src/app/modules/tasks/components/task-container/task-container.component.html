@@ -1,1 +1,35 @@
-<p>task-container works!</p>
+<div *ngIf="(tasks$ | async) as tasks; else notFetched;">
+    <ng-template #todos>
+        <app-task-form></app-task-form>
+        <app-task-list [pendingTasks]="_filterTasksByStatus(PENDING) | async"
+            [inProgressTasks]="_filterTasksByStatus(IN_PROGRESS) | async"
+            [completedTasks]="_filterTasksByStatus(COMPLETED) | async">
+        </app-task-list>
+    </ng-template>
+    <div *ngIf="tasks.length === 0; else todos;">
+        <div class="container-fluid text-center d-flex justify-content-center align-items-center flex-column"
+            style="color: rgb(168, 165, 165);">
+            <span>Nice! You have no todos pending</span>
+        </div>
+    </div>
+</div>
+<ng-template #notFetched>
+    <!-- Spinner de Bootstrap 5 -->
+    <div class="d-flex justify-content-center align-items-center full-h-container" *ngIf="!error;else errorMessage;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <ng-template #errorMessage>
+        <div class="container-fluid text-center d-flex justify-content-center align-items-center flex-column"
+            style="color: rgb(168, 165, 165);">
+            <span>THERE HAS BEEN AN ERROR</span>
+            <svg fill="#A8A5A5" width="50px" height="50px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 7h2v7h-2zm0 8h2v2h-2z" />
+                <path
+                    d="m21.707 7.293-5-5A.996.996 0 0 0 16 2H8a.996.996 0 0 0-.707.293l-5 5A.996.996 0 0 0 2 8v8c0 .266.105.52.293.707l5 5A.996.996 0 0 0 8 22h8c.266 0 .52-.105.707-.293l5-5A.996.996 0 0 0 22 16V8a.996.996 0 0 0-.293-.707zM20 15.586 15.586 20H8.414L4 15.586V8.414L8.414 4h7.172L20 8.414v7.172z" />
+            </svg>
+        </div>
+    </ng-template>
+
+</ng-template>
