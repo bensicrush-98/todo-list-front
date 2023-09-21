@@ -8,7 +8,12 @@ import { TaskContainerComponent } from './components/task-container/task-contain
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  declarations: [TaskComponent, TaskFormComponent, TaskListComponent, TaskContainerComponent],
+  declarations: [
+    TaskComponent,
+    TaskFormComponent,
+    TaskListComponent,
+    TaskContainerComponent,
+  ],
   imports: [CommonModule, TasksRoutingModule, SharedModule],
 })
 export class TasksModule {}

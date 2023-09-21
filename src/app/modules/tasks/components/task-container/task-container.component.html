@@ -1,6 +1,5 @@
 <div *ngIf="(tasks$ | async) as tasks; else notFetched;">
     <ng-template #todos>
-        <app-task-form></app-task-form>
         <app-task-list [pendingTasks]="_filterTasksByStatus(PENDING) | async"
             [inProgressTasks]="_filterTasksByStatus(IN_PROGRESS) | async"
             [completedTasks]="_filterTasksByStatus(COMPLETED) | async">
@@ -32,7 +31,7 @@
 </ng-template>
 
 <button
-    class="btn btn-primary position-absolute bottom-0 end-0 rounded-circle p-3 m-5"
+    class="btn btn-primary position-fixed bottom-0 end-0 rounded-circle p-3 m-5"
     style="width: 60px; height: 60px;z-index: 1000;" (click)="_onOpenCreateTaskDialog()">
     <mat-icon style="font-size: 38px;" class="d-flex justify-content-center align-items-center">add</mat-icon>
 </button>

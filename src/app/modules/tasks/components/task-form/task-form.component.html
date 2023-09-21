@@ -1,0 +1,40 @@
+<!-- Modal Content -->
+<div class="modal-content p-5">
+    <div class="modal-header">
+        <h5 class="modal-title w-100 text-center">Crear Nueva Tarea</h5>
+        <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+    </div>
+    <div class="modal-body mt-3">
+        <form [formGroup]="taskForm" (ngSubmit)="_onSubmit()" class="d-flex flex-column">
+            <!-- Título -->
+            <mat-form-field appearance="outline" class="mb-3 full-width">
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="title" placeholder="Introduce el título de la tarea">
+                <mat-error *ngIf="taskForm.get('title').hasError('required')">
+                    Title is mandatory
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Descripción -->
+            <mat-form-field appearance="outline" class="mb-3 full-width">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput formControlName="description"
+                    placeholder="Introduce la descripción de la tarea"></textarea>
+            </mat-form-field>
+
+            <!-- Fecha de Vencimiento -->
+            <mat-form-field appearance="outline" class="mb-3 full-width">
+                <mat-label>Fecha de Vencimiento</mat-label>
+                <input matInput type="date" formControlName="dueDate">
+                <mat-error *ngIf="taskForm.get('dueDate').hasError('notFutureDate')">
+                    It must be a future date
+                </mat-error>
+            </mat-form-field>
+
+            <!-- Botón de Crear -->
+            <div class="d-grid gap-2">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!taskForm.valid">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>

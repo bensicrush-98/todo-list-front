@@ -37,10 +37,6 @@ $todolist-theme: mat.define-light-theme((
 @import '../node_modules/ngx-toastr/toastr-bs5-alert.scss';
 @import './assets/styles/_styles.scss';
 
-body,
-html {
-    height:100%;
-}
 .full-h-container{
     height: calc(100vh - 80px);
 }

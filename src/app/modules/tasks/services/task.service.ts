@@ -37,13 +37,21 @@ export class TaskService {
    * @param dueDate 
    * @returns an observable of the just created task
    */
-  createTask(title: string, description: string, dueDate: moment.Moment): Observable<Task> {
+  createTask(title: string, description: string, dueDate: string): Observable<Task> {
     const body: TaskCreationRequest = {
       title,
       description,
       dueDate
     };
-    return this._http.post<Task>(`${this.BASE_URL}/create`, body, { headers: this.setAuthHeaders() });
+    return this._http
+      .post<Task>(`${this.BASE_URL}/create`, body, {
+        headers: this.setAuthHeaders(),
+      })
+      .pipe(
+        tap(() => {
+          this._taskUpdateSubject.next();
+        })
+      );
   }
 
   /**

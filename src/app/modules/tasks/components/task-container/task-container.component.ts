@@ -13,6 +13,8 @@ import { Task } from 'src/app/interfaces/task.interface';
 import { TaskService } from '../../services/task.service';
 import { TaskStatus } from 'src/app/enums/task-status.enum';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskFormComponent } from '../task-form/task-form.component';
 
 @Component({
   selector: 'app-task-container',
@@ -32,7 +34,8 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
 
   constructor(
     private _taskService: TaskService,
-    private _toastrService: ToastrService
+    private _toastrService: ToastrService,
+    private _dialog: MatDialog
   ) {
     this._taskService.taskUpdateSubject$
       .pipe(takeUntil(this._unsubscribe$))
@@ -89,6 +92,8 @@ export class TaskContainerComponent implements OnInit, OnDestroy {
   }
 
   _onOpenCreateTaskDialog(): void {
-    
+    const dialogRef = this._dialog.open(TaskFormComponent, {
+      width: '100%',
+    })
   }
 }

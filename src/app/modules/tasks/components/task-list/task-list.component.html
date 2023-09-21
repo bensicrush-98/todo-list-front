@@ -1,11 +1,17 @@
 <div class="container mt-5">
     <div *ngFor="let taskGroup of tasksGroup" class="mb-4">
-        <h2>{{_getSectionTitle(taskGroup.status)}} <span *ngIf="taskGroup.tasks.length > 0">({{taskGroup.tasks.length}})</span> </h2>
+        <!-- Encabezado de la sección -->
+        <div class="d-flex align-items-center mb-3">
+            <h5 class="mb-0">{{_getSectionTitle(taskGroup.status)}}</h5>
+            <span class="badge bg-secondary rounded-pill mx-2">{{taskGroup.tasks.length}} tasks</span>
+        </div>
+
+        <!-- Lista de tareas -->
         <ul class="list-group">
-            <span style="color: rgb(168, 165, 165);" *ngIf="taskGroup.tasks.length === 0" class="p-3">You have 0
-                tasks</span>
-            <li *ngFor="let task of taskGroup.tasks">
-                <app-task [status]="task.status" [title]="task.title" [description]="task.description" [dueDate]="task.dueDate" [id]="task.id"></app-task>
+            <li *ngIf="taskGroup.tasks.length === 0" class="list-group-item text-muted">You have 0 tasks</li>
+            <li *ngFor="let task of taskGroup.tasks" class="list-group-item">
+                <app-task [status]="task.status" [title]="task.title" [description]="task.description"
+                    [dueDate]="task.dueDate" [id]="task.id"></app-task>
             </li>
         </ul>
     </div>
