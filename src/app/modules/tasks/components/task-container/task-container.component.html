@@ -14,11 +14,8 @@
     </div>
 </div>
 <ng-template #notFetched>
-    <!-- Spinner de Bootstrap 5 -->
-    <div class="d-flex justify-content-center align-items-center full-h-container" *ngIf="!error;else errorMessage;">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
+    <div class="d-flex justify-content-center align-items-center full-h-container" *ngIf="!_error;else errorMessage;">
+        <div class="spinner-border" role="status"></div>
     </div>
     <ng-template #errorMessage>
         <div class="container-fluid text-center d-flex justify-content-center align-items-center flex-column"
@@ -33,3 +30,9 @@
     </ng-template>
 
 </ng-template>
+
+<button
+    class="btn btn-primary position-absolute bottom-0 end-0 rounded-circle p-3 m-5"
+    style="width: 60px; height: 60px;z-index: 1000;" (click)="_onOpenCreateTaskDialog()">
+    <mat-icon style="font-size: 38px;" class="d-flex justify-content-center align-items-center">add</mat-icon>
+</button>

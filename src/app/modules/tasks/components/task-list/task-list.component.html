@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <div *ngFor="let taskGroup of tasksGroup" class="mb-4">
-        <h2>{{taskGroup.status}}</h2>
+        <h2>{{_getSectionTitle(taskGroup.status)}} <span *ngIf="taskGroup.tasks.length > 0">({{taskGroup.tasks.length}})</span> </h2>
         <ul class="list-group">
             <span style="color: rgb(168, 165, 165);" *ngIf="taskGroup.tasks.length === 0" class="p-3">You have 0
                 tasks</span>

@@ -44,13 +44,8 @@ export class TaskComponent {
       status,
     };
     this._taskService.updateTask(body).subscribe({
-      next: () => this._handleTaskUpdatedSuccess(),
       error: () => this._handleTaskUpdatedError(),
     });
-  }
-
-  _handleTaskUpdatedSuccess(): void {
-    this._toastrService.success('Task updated successfully');
   }
 
   _handleTaskUpdatedError(): void {

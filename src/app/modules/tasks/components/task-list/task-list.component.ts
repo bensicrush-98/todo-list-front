@@ -32,4 +32,8 @@ export class TaskListComponent implements OnInit {
       { status: TaskStatus.COMPLETED, tasks: this.completedTasks },
     ];
   }
+
+  _getSectionTitle(status: TaskStatus) {
+    return status != TaskStatus.IN_PROGRESS ? status : "IN PROGRESS";
+  }
 }
